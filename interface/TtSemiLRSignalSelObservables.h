@@ -26,7 +26,7 @@
 //TQAF classes
 #include "AnalysisDataFormats/TopObjects/interface/TtSemiEvtSolution.h"
 #include "AnalysisDataFormats/TopObjects/interface/TopJet.h"
-#include "TopQuarkAnalysis/TopEventSelection/interface/MEzCalculator.h"
+#include "TopQuarkAnalysis/TopTools/interface/MEzCalculator.h"
 
 const double PI=3.14159265;
 
