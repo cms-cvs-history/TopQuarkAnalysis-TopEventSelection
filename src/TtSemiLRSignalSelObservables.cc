@@ -112,10 +112,9 @@ void TtSemiLRSignalSelObservables::operator() (TtSemiEvtSolution &TS,const std::
 	
 // Transverse Mass of the system
 
-	TLorentzVector *TtbarSystem = new TLorentzVector();
-	TtbarSystem = &((*Hadp)+(*Hadq)+(*Hadb)+(*Lepb)+(*Lept)+(*Lepn));
+	TLorentzVector TtbarSystem = (*Hadp)+(*Hadq)+(*Hadb)+(*Lepb)+(*Lept)+(*Lepn);
 	
-	double MT = TtbarSystem->Mt();
+	double MT = TtbarSystem.Mt();
 	double Obs7 = MT;
 	evtselectVarVal.push_back(pair<unsigned int,double>(7,Obs7));
 	if(DEBUG) cout<<"------ LR observable 7 "<<Obs7<<" calculated ------"<<endl;
@@ -268,7 +267,7 @@ void TtSemiLRSignalSelObservables::operator() (TtSemiEvtSolution &TS,const std::
 
 // Sphericity and Aplanarity with boosting back the system to CM frame	
 
-	TVector3 BoostBackToCM = -(TtbarSystem->BoostVector());
+	TVector3 BoostBackToCM = -(TtbarSystem.BoostVector());
 	Hadp->Boost(BoostBackToCM);
 	Hadq->Boost(BoostBackToCM);
 	Hadb->Boost(BoostBackToCM);
@@ -598,8 +597,6 @@ void TtSemiLRSignalSelObservables::operator() (TtSemiEvtSolution &TS,const std::
 	TS.setLRSignalEvtObservables(evtselectVarVal);
 	if(DEBUG) cout<<"------  Observable values stored in the event  ------"<<endl;
 
-	//delete TtbarSystem;
-	if(DEBUG) cout<<"------     Pointer to TtbarSystem deleted      ------"<<endl;
 	delete Hadp;
 	if(DEBUG) cout<<"------     Pointer to Hadp deleted             ------"<<endl;
 	delete Hadq;
