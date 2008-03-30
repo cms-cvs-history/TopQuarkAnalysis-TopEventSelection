@@ -59,7 +59,7 @@ TtDilepLRSignalSelObservables::operator() (TtDilepEvtSolution &solution,
     iEvent.getByLabel ("genEvt",genEvent);
 
     if (genEvent->isFullLeptonic()) {
-      // cout << "Dilepton:\n";
+      //cout << "Dilepton:\n";
       // Match the leptons, by type and deltaR
       dr = DeltaR<reco::Particle>()(solution.getLeptPos(), *(solution.getGenLepp()));
       matchLeptPos = (
@@ -78,7 +78,8 @@ TtDilepLRSignalSelObservables::operator() (TtDilepEvtSolution &solution,
 
     if (genEvent->isSemiLeptonic()) {
       int id = genEvent->singleLepton()->pdgId();
-      // cout << "Semi-Leptonic: ";
+      //cout << "Semi-Leptonic: ";
+
       if (id>0) {
 	dr = DeltaR<reco::Particle>()(solution.getLeptNeg(), *(genEvent->singleLepton()));
 	matchLeptNeg = (
@@ -96,56 +97,49 @@ TtDilepLRSignalSelObservables::operator() (TtDilepEvtSolution &solution,
       }
     }
 
-    //if (genEvent->isFullHadronic()) {// cout << "Hadronic\n";}
-
-    // cout << "Am here\n" <<genEvent->numberOfBQuarks()<<endl;
-
-    if (genEvent->numberOfBQuarks()>1) {
-
-
+    if (genEvent->isFullHadronic()) {
+      // cout << "Hadronic\n";
+    }
+    
+    if (genEvent->isTtBar() && genEvent->numberOfBQuarks()>1) {
       if (solution.getJetB().getPartonFlavour()==5) ++count1;
       if (solution.getJetBbar().getPartonFlavour()==5) ++count1;
 
       dr1 = DeltaR<reco::Particle>()(solution.getCalJetB(), *(genEvent->b()));
       dr2 = DeltaR<reco::Particle>()(solution.getCalJetB(), *(genEvent->bBar()));
 
-      matchB1 = ( (dr1<0.4) || (dr2<0.4));
-
+      matchB1= ( (dr1<0.4) || (dr2<0.4));
       matchB = ( (solution.getJetB().getPartonFlavour()==5) && (dr1<0.4) );
       if (matchB) ++count3;
       matchB = ( (dr1<0.4) );
       if (dr1<0.5) ++count2;
       if (dr1<0.4) ++count4;
       if (dr1<0.3) ++count5;
-    // cout << solution.getJetB().getPartonFlavour() << " "<<dr<<endl;
+      //cout << solution.getJetB().getPartonFlavour() << " "<<dr<<endl;
 
       dr1 = DeltaR<reco::Particle>()(solution.getCalJetBbar(), *(genEvent->b()));
       dr2 = DeltaR<reco::Particle>()(solution.getCalJetBbar(), *(genEvent->bBar()));
-       matchBbar = ( (solution.getJetBbar().getPartonFlavour()==5) && (dr2<0.4) );
+
+      matchBbar = ( (solution.getJetBbar().getPartonFlavour()==5) && (dr2<0.4) );
       if (matchBbar) ++count3;
       matchBbar = ( (dr2<0.4) );
       matchB2 = ( (dr1<0.4) || (dr2<0.4));
       if (dr2<0.5) ++count2;
       if (dr2<0.4) ++count4;
       if (dr2<0.3) ++count5;
-    // cout << solution.getJetBbar().getPartonFlavour() << " "<<dr<<endl;
+      //cout << solution.getJetBbar().getPartonFlavour() << " "<<dr<<endl;
     }
 
-
     //Look at the b-jets:
-
-
- // cout << "Final Match: "<<   matchB<<matchBbar <<matchLeptPos <<matchLeptNeg<<endl;
-
-    } catch (...){cout << "Exception\n";}
+    //cout << "Final Match: "<<   matchB<<matchBbar <<matchLeptPos <<matchLeptNeg<<endl;
+    
+  } catch (...){cout << "Exception\n";}
   
-  //cout<<"New event being processed"<<endl;
-
   Handle<vector<TopJet> > jets;
   iEvent.getByLabel(jetSource_, jets);
-
+  
   //  Lower / Higher of both jet angles
-
+  
   double v1 = abs( solution.getJetB().p4().theta() - M_PI/2 );
   double v2 = abs( solution.getJetBbar().p4().theta() - M_PI/2 ) ;
   fillMinMax(v1, v2, 1, evtselectVarVal, matchB1, matchB2, evtselectVarMatch);
