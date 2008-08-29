@@ -16,28 +16,13 @@ process.MessageLogger.cerr.threshold = 'INFO'
 
 ## define input
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(
-      'file:/storage/4/jkiefer/RelVal/04D2EB26-1861-DD11-8B21-001731A2845B.root',
-      'file:/storage/4/jkiefer/RelVal/3620258E-1561-DD11-8532-0018F3D09700.root',
-      'file:/storage/4/jkiefer/RelVal/2E7D553F-1661-DD11-950A-003048767653.root',
-      'file:/storage/4/jkiefer/RelVal/36324959-A160-DD11-BB4B-000423D99BF2.root',
-      'file:/storage/4/jkiefer/RelVal/08CA1B5E-1961-DD11-AABD-003048767EE7.root',
-      'file:/storage/4/jkiefer/RelVal/381F1D8D-1861-DD11-A1FB-001A928116FA.root',
-      'file:/storage/4/jkiefer/RelVal/14F7E282-1761-DD11-A114-001A92971B4C.root',
-      'file:/storage/4/jkiefer/RelVal/1A773E5E-A160-DD11-81E8-001617C3B78C.root',
-      'file:/storage/4/jkiefer/RelVal/3C03B69E-1761-DD11-96EE-001731AF67C5.root',
-      'file:/storage/4/jkiefer/RelVal/1AABF3C1-A460-DD11-888C-001617E30D40.root',
-      'file:/storage/4/jkiefer/RelVal/202BB34D-A160-DD11-B602-00161757BF42.root',
-      'file:/storage/4/jkiefer/RelVal/22D6BF8B-1761-DD11-BC60-001A92810AF2.root',
-      'file:/storage/4/jkiefer/RelVal/266AEE4A-A160-DD11-899F-0019DB29C620.root',
-      'file:/storage/4/jkiefer/RelVal/2ADCDD72-1861-DD11-81C7-001A928116C4.root',
-      'file:/storage/4/jkiefer/RelVal/2ED71580-1561-DD11-9E41-003048767ECF.root'
+    fileNames = cms.untracked.vstring('file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root',
     )
 )
 
 ## define maximal number of events to loop over
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(-1)
 )
 
 ## configure process options
