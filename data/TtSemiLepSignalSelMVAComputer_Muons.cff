@@ -1,7 +1,0 @@
-# include MVA computer cfi
-  include "TopQuarkAnalysis/TopEventSelection/data/TtSemiLepSignalSelMVAComputer_Muons.cfi"
-
-# provide mva training file
-  es_source = TtSemiLepSignalSelMVAFileSource {
-    FileInPath ttSemiLepSignalSelMVA = "TopQuarkAnalysis/TopEventSelection/data/TtSemiLepSignalSel_Muons.mva"
-  }  

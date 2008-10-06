@@ -8,47 +8,37 @@
 
         <input id="input">
                 <var name="dphiMETlepton"     multiple="false" optional="false"/>
-               <!--  <var name="dphiMETleadingjet" multiple="false" optional="false"/> -->
-<!--                 <var name="ETratiojet5jet4"   multiple="false" optional="false"/> -->
+                <var name="dphiMETleadingjet" multiple="false" optional="false"/>
+                <var name="ETratiojet5jet4"   multiple="false" optional="false"/>
                 <var name="aplanarity"        multiple="false" optional="false"/>
-              <!--  <var name="sphericity"        multiple="false" optional="false"/> -->
+                <var name="sphericity"        multiple="false" optional="false"/>
                 <var name="circularity"       multiple="false" optional="false"/>
-              <!--  <var name="isotropy"          multiple="false" optional="false"/> -->
-                <var name="sumEt"             multiple="false" optional="false"/> 
+                <var name="isotropy"          multiple="false" optional="false"/>  
+                <var name="sumEt"             multiple="false" optional="false"/>
                 <var name="maxEta"            multiple="false" optional="false"/>
-                <var name="relEt1"               multiple="false" optional="false"/>
-                <var name="relEt2"               multiple="false" optional="false"/>
-                <var name="relEt3"               multiple="false" optional="false"/>
-                <var name="relEt4"               multiple="false" optional="false"/>
-              <!--  <var name="lepPt"             multiple="false" optional="false"/> -->
-                <var name="Abs(lepeta)"            multiple="false" optional="false"/>    
-                <var name="dRlepjet1"         multiple="false" optional="false"/> 
-              <!--  <var name="etajet1"           multiple="false" optional="false"/> -->
-                <var name="dphilepjet1"       multiple="false" optional="false"/>
-              <!--  <var name="Ht"       multiple="false" optional="false"/> -->
+                <var name="Et1"               multiple="false" optional="false"/>
+                <var name="Et2"               multiple="false" optional="false"/>
+                <var name="Et3"               multiple="false" optional="false"/>
+                <var name="Et4"               multiple="false" optional="false"/>
+                <var name="lepPt"             multiple="false" optional="false"/>    
         </input>
 
         <processor id="norm" name="ProcNormalize">
                 <input>
                         <var source="input" name="dphiMETlepton"/>
-                        <!-- <var source="input" name="dphiMETleadingjet"/> -->
-<!--                         <var source="input" name="ETratiojet5jet4"/> -->
+                        <var source="input" name="dphiMETleadingjet"/>
+                        <var source="input" name="ETratiojet5jet4"/>
                         <var source="input" name="aplanarity"/> 
-                   <!--     <var source="input" name="sphericity"/> -->
+                        <var source="input" name="sphericity"/> 
                         <var source="input" name="circularity"/> 
-                   <!--     <var source="input" name="isotropy"/> -->
-                        <var source="input" name="sumEt"/> 
+                        <var source="input" name="isotropy"/>
+                        <var source="input" name="sumEt"/>
                         <var source="input" name="maxEta"/>
-                        <var source="input" name="relEt1"/>
-                        <var source="input" name="relEt2"/>
-                        <var source="input" name="relEt3"/>
-                        <var source="input" name="relEt4"/>
-                   <!--     <var source="input" name="lepPt"/> -->
-                        <var source="input" name="Abs(lepeta)"/>
-                        <var source="input" name="dRlepjet1"/>
-                   <!--     <var source="input" name="etajet1"/> -->
-                        <var source="input" name="dphilepjet1"/>
-                   <!--     <var source="input" name="Ht"/> -->
+                        <var source="input" name="Et1"/>
+                        <var source="input" name="Et2"/>
+                        <var source="input" name="Et3"/>
+                        <var source="input" name="Et4"/>
+                        <var source="input" name="lepPt"/>
                 </input>
                 <config>
                         <pdf/>
@@ -63,9 +53,8 @@
                         <pdf/>
                         <pdf/> 
                         <pdf/>
-                       <!--  <pdf/> -->
-<!--                         <pdf/> -->
-<!--                         <pdf/> -->
+                        <pdf/>
+                        <pdf/>
                 </config>
                 <output>
                         <var name="var1"/>
@@ -80,9 +69,8 @@
                         <var name="var10"/> 
                         <var name="var11"/> 
                         <var name="var12"/>
-                      <!--   <var name="var13"/> -->
-<!--                         <var name="var14"/> -->
-<!--                         <var name="var15"/>  -->
+                        <var name="var13"/>
+                        <var name="var14"/> 
                 </output>
         </processor>
 
@@ -101,9 +89,8 @@
                         <var source="norm" name="var10"/>
                         <var source="norm" name="var11"/>
                         <var source="norm" name="var12"/>
-                       <!--  <var source="norm" name="var13"/> -->
-<!--                         <var source="norm" name="var14"/> -->
-<!--                         <var source="norm" name="var15"/> -->
+                        <var source="norm" name="var13"/>
+                        <var source="norm" name="var14"/>
 		</input>
 		<config>
 			<fill signal="true" background="true"/>
@@ -121,47 +108,28 @@
                         <var name="rot10"/>
 			<var name="rot11"/>
 			<var name="rot12"/>
-                      <!--   <var name="rot13"/> -->
-<!--                         <var name="rot14"/> -->
-<!--                         <var name="rot15"/> -->
+                        <var name="rot13"/>
+                        <var name="rot14"/>
 		</output>
 	</processor>
 
 
 	<processor id="likelihood" name="ProcLikelihood">
-		<!-- <input> -->
-<!-- 			 <var source="norm" name="var1"/> -->
-<!-- 			 <var source="norm" name="var2"/> -->
-<!-- 			 <var source="norm" name="var3"/> -->
-<!-- 			 <var source="norm" name="var4"/>  -->
-<!-- 			 <var source="norm" name="var5"/>  -->
-<!-- 			 <var source="norm" name="var6"/>  -->
-<!-- 			 <var source="norm" name="var7"/>  -->
-<!--                          <var source="norm" name="var8"/> -->
-<!--                          <var source="norm" name="var9"/> -->
-<!--                          <var source="norm" name="var10"/>  -->
-<!-- 			 <var source="norm" name="var11"/>  -->
-<!-- 			 <var source="norm" name="var12"/>  -->
-<!--                          <var source="norm" name="var13"/> -->
-<!--                          <var source="norm" name="var14"/>  -->
-<!--                          <var source="norm" name="var15"/>  -->
-<!-- 		</input> -->
-                <input>
-			 <var source="rot" name="rot1"/>
-			 <var source="rot" name="rot2"/>
-			 <var source="rot" name="rot3"/>
-			 <var source="rot" name="rot4"/> 
-			 <var source="rot" name="rot5"/> 
-			 <var source="rot" name="rot6"/> 
-			 <var source="rot" name="rot7"/> 
-                         <var source="rot" name="rot8"/>
-                         <var source="rot" name="rot9"/>
-                         <var source="rot" name="rot10"/> 
-			 <var source="rot" name="rot11"/> 
-			 <var source="rot" name="rot12"/> 
-                        <!--  <var source="rot" name="rot13"/> -->
-<!--                          <var source="rot" name="rot14"/>  -->
-<!--                          <var source="rot" name="rot15"/>  -->
+		<input>
+			 <var source="norm" name="var1"/>
+			 <var source="norm" name="var2"/>
+			 <var source="norm" name="var3"/>
+			 <var source="norm" name="var4"/> 
+			 <var source="norm" name="var5"/> 
+			 <var source="norm" name="var6"/> 
+			 <var source="norm" name="var7"/> 
+                         <var source="norm" name="var8"/>
+                         <var source="norm" name="var9"/>
+                         <var source="norm" name="var10"/> 
+			 <var source="norm" name="var11"/> 
+			 <var source="norm" name="var12"/> 
+                         <var source="norm" name="var13"/>
+                         <var source="norm" name="var14"/> 
 		</input>
 		<config>
 			<sigbkg smooth="3"/>
@@ -176,9 +144,8 @@
                         <sigbkg smooth="3"/> 
  			<sigbkg smooth="3"/> 
                         <sigbkg smooth="3"/>
-                     <!--    <sigbkg smooth="3"/> -->
-<!--                         <sigbkg smooth="3"/>  -->
-<!--                         <sigbkg smooth="3"/>  -->
+                        <sigbkg smooth="3"/>
+                        <sigbkg smooth="3"/> 
 		</config>
 		<output>
 			<var name="discriminator"/>
