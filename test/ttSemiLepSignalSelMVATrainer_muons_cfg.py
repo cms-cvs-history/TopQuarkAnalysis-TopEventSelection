@@ -1,8 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
 #-------------------------------------------------
-# test cfg file for mva training for jet parton 
-# association
+# test cfg file for mva training for event selection
 #-------------------------------------------------
 process = cms.Process("TEST")
 
@@ -22,7 +21,7 @@ process.source = cms.Source("PoolSource",
 
 ## define maximal number of events to loop over
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(-1)
+    input = cms.untracked.int32(100)
 )
 
 ## configure process options
@@ -40,13 +39,12 @@ process.GlobalTag.globaltag = cms.string('STARTUP_V4::All')
 ## load magnetic field
 process.load("Configuration.StandardSequences.MagneticField_cff")
 
-
 #-------------------------------------------------
 # tqaf configuration
 #-------------------------------------------------
 
 ## std sequence for tqaf layer1
-process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
+process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_cff")
 
 ## std sequence for ttGenEvent
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
@@ -55,9 +53,6 @@ process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
 process.load("TopQuarkAnalysis.TopEventProducers.producers.TtDecaySelection_cfi")
 process.ttDecaySelection.channel_1 = [0, 1, 0]
 
-## configure jet parton matching
-#process.load("TopQuarkAnalysis.TopTools.TtSemiEvtJetPartonMatch_cfi")
-
 ## configure mva trainer
 process.load("TopQuarkAnalysis.TopEventSelection.TtSemiLepSignalSelMVATrainer_Muons_cff")
 
@@ -65,16 +60,19 @@ process.load("TopQuarkAnalysis.TopEventSelection.TtSemiLepSignalSelMVATrainer_Mu
 from TopQuarkAnalysis.TopEventSelection.TtSemiLepSignalSelMVATrainer_Muons_cff import looper
 process.looper = looper
 
+## necessary fixes to run 2.2.X on 2.1.X data
+## comment this when running on samples produced with 22X
+from PhysicsTools.PatAlgos.tools.cmsswVersionTools import run22XonSummer08AODSIM
+run22XonSummer08AODSIM(process)
+
 #-------------------------------------------------
 # process paths;
 #-------------------------------------------------
 
-## make jet parton match
+## produce tqafLayer1, ttGenEvent and selection of decay channel
 process.p0 = cms.Path(process.tqafLayer1 *
                       process.makeGenEvt *
-                      process.ttDecaySelection #*
-                      #process.ttSemiJetPartonMatch
-                      )
+                      process.ttDecaySelection)
 
 ## make mva training
 process.p1 = cms.Path(process.makeMVATraining)
