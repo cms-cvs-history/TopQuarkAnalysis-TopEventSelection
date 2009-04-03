@@ -54,10 +54,10 @@ process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_cff")
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
 
 ## configure mva trainer
-process.load("TopQuarkAnalysis.TopEventSelection.TraintreeSaver_cff")
+process.load("TopQuarkAnalysis.TopEventSelection.TtSemiLepSignalSelMVATrainTreeSaver_cff")
 
 ## make trainer looper known to the process
-from TopQuarkAnalysis.TopEventSelection.TraintreeSaver_cff import looper
+from TopQuarkAnalysis.TopEventSelection.TtSemiLepSignalSelMVATrainTreeSaver_cff import looper
 process.looper = looper
 
 ## necessary fixes to run 2.2.X on 2.1.X data
