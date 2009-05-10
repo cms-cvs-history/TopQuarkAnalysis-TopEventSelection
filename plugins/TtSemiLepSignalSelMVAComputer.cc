@@ -18,10 +18,10 @@
 TtSemiLepSignalSelMVAComputer::TtSemiLepSignalSelMVAComputer(const edm::ParameterSet& cfg):
   muons_ (cfg.getParameter<edm::InputTag>("muons")),
   jets_    (cfg.getParameter<edm::InputTag>("jets")),
-  METs_    (cfg.getParameter<edm::InputTag>("METs")),
-  electrons_ (cfg.getParameter<edm::InputTag>("electrons"))
+  METs_    (cfg.getParameter<edm::InputTag>("mets")),
+  electrons_ (cfg.getParameter<edm::InputTag>("elecs"))
 {
-  produces< double        >("DiscSel");
+  produces< double >("DiscSel");
 }
 
   
